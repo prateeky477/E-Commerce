@@ -8,14 +8,17 @@ import axios from "axios"
 import { AuthContext } from "../context/LoggedIn"
 const Header = () => {
   const auth = useContext(AuthContext)
+
+  const [newSearch, setNewSearch] = useState('')
   const handeKeyDown = async (e) => {
     // console.log(search)
     console.log(typeof (item))
     console.log(auth.searchP)
+    // auth.setSearchP(newSearch)
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3000/products/s", {
-        "model": auth.searchP
+        "model": newSearch
       }, {
         withCredentials: true
       }
@@ -58,7 +61,7 @@ const Header = () => {
         <Flex flex={1} justifyContent="center" gap={10}>
           <Box bg="gray.200" borderRadius="xl" p={1} pl={2} pr={4} display="flex" alignItems="center">
             <Input
-              onChange={(event) => auth.setSearchP(event.target.value)}
+              onChange={(event) => setNewSearch(event.target.value)}
               variant="unstyled"
               flex={1}
               ml={2}
