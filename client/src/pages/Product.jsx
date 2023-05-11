@@ -40,7 +40,7 @@ const Product = () => {
                   m={4}
                 >
                   <Box  className=' p-10 transition ease-in-out delay-50  hover:scale-110 duration-500 '>
-                    <Box d="flex" alignItems="baseline">
+                    <Box d="flex" alignItems="baseline" className=''>
                       <Image src={product.img} alt='Dan Abramov' h='300px' w='300px' className='rounded-md' />
                       <Text fontSize="sm" color="gray.500" fontWeight="semibold">
                         {product.brand} {product.model}
