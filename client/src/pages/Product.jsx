@@ -26,7 +26,7 @@ const Product = () => {
 
   return (
     <>
-      <div>
+      <div className=''>
         {
           auth?.searchP && <Flex flexWrap="wrap" justifyContent="center" alignItems="center" >
             {products.map((product) => (
@@ -39,9 +39,9 @@ const Product = () => {
                   overflow="hidden"
                   m={4}
                 >
-                  <Box p="6">
+                  <Box  className=' p-10 transition ease-in-out delay-50  hover:scale-110 duration-500 '>
                     <Box d="flex" alignItems="baseline">
-                      <Image src={product.img} alt='Dan Abramov' h='300px' w='300px' />
+                      <Image src={product.img} alt='Dan Abramov' h='300px' w='300px' className='rounded-md' />
                       <Text fontSize="sm" color="gray.500" fontWeight="semibold">
                         {product.brand} {product.model}
                       </Text>
