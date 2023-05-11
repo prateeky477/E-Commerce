@@ -10,9 +10,6 @@ const Product = () => {
   const { products } = useContext(ProductContext);
   const [error, setError] = useState('');
 
-
-
-
   const auth = useContext(AuthContext)
   console.log(auth.searchP[0])
   useEffect(() => {
