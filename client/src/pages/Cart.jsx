@@ -81,12 +81,12 @@ const Cart = () => {
 
         <VStack spacing={5} align={{ base: "center", sm: "flex-start" }}>
           <Text fontSize="2xl">Summary</Text>
-          <Text> Subtotal : Rs. {totalPrice}</Text>
-          <Text>Estimated Delivery & Handling : Rs. {totalPrice * 0.15}</Text>
+          <Text> Subtotal : $. {totalPrice}</Text>
+          <Text>Estimated Delivery & Handling : $ {totalPrice * 0.15}</Text>
           <Divider />
           <Flex justify="space-between" w="100%">
             <Text fontWeight="semibold">
-              Total <span>Rs. {totalPrice + totalPrice * 0.15}</span>
+              Total <span>$. {totalPrice + totalPrice * 0.15}</span>
             </Text>
           </Flex>
           <Divider />
