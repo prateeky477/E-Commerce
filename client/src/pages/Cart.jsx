@@ -29,7 +29,7 @@ const Cart = () => {
       try {
         const response = await auth?.userData;
         setCart(response.cart);
-        console.log(response.data,response.data.cart)
+        console.log(response.data.data,response.data.data.cart)
       } catch (err) {
         setError(err.response.data);
       }
