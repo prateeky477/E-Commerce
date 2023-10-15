@@ -1,9 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Product from './pages/Product'
-import Men from './pages/Men'
-import Women from './pages/Women'
-import Kids from './pages/Kids'
 import SingleProduct from './pages/SingleProduct'
 import Cart from './pages/Cart'
 import Profile from './pages/Profile'
@@ -32,9 +29,6 @@ function App() {
           <Route path='/help' element={<Help />}></Route>
           <Route path='/about' element={<AboutUs />}></Route>
           <Route path='/contact' element={<ContactUs />}></Route>
-          <Route path='/men' element={<Men />}></Route>
-          <Route path='/women' element={<Women />}></Route>
-          <Route path='/kids' element={<Kids />}></Route>
           <Route path='/register' element={<SignUp />}></Route>
           <Route path='/login' element={<LogIn />}></Route>
           <Route path='/userInfo' element={<UserInfo />}></Route>

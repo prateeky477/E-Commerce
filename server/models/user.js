@@ -40,6 +40,16 @@ const userSchema = new mongoose.Schema({
             type: Number,
             required: true
         }
+    }],
+    credits: {
+        type: Number,
+        default: 1000, // Set the default value to 1000
+    },
+    favorites: [{
+        pid: {
+            type: String,
+            required: false
+        }
     }]
 
 });

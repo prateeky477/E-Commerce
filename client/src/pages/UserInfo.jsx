@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import {
     Box,
@@ -9,18 +9,18 @@ import {
     Stack,
     Text,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/LoggedIn';
+
 const UserInfo = () => {
+    const navigate = useNavigate();
+    const auth = useContext(AuthContext);
 
-
-    const auth = useContext(AuthContext)
-    const [name, setName] = useState('')
-    const [phone, setPhone] = useState()
-    const [address, setAddress] = useState('')
-    const [pincode, setPincode] = useState()
-    console.log(auth)
+    const [name, setName] = useState(auth.userData.data.name || '');
+    const [phone, setPhone] = useState(auth.userData.data.phone || '');
+    const [address, setAddress] = useState(auth.userData.data.address || '');
+    const [pincode, setPincode] = useState(auth.userData.data.pincode || '');
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,9 +37,11 @@ const UserInfo = () => {
 
             console.log(response.data);
             alert('User info saved successfully!');
+            navigate("/");
         } catch (error) {
             console.error(error);
             alert('Failed to save user info.');
+            setError('Failed to save user info.');
         }
     };
 
@@ -55,7 +57,7 @@ const UserInfo = () => {
                             <FormLabel>Name</FormLabel>
                             <Input
                                 type="text"
-                                value={auth.userData.data.name}
+                                value={name}
                                 onChange={(event) => setName(event.target.value)}
                             />
                         </FormControl>
@@ -63,7 +65,7 @@ const UserInfo = () => {
                             <FormLabel>Address</FormLabel>
                             <Input
                                 type="text"
-                                value={auth.userData.data.address}
+                                value={address}
                                 onChange={(event) => setAddress(event.target.value)}
                             />
                         </FormControl>
@@ -71,7 +73,7 @@ const UserInfo = () => {
                             <FormLabel>Phone</FormLabel>
                             <Input
                                 type="number"
-                                value={auth.userData.data.phone}
+                                value={phone}
                                 onChange={(event) => setPhone(event.target.value)}
                             />
                         </FormControl>
@@ -79,11 +81,11 @@ const UserInfo = () => {
                             <FormLabel>PinCode</FormLabel>
                             <Input
                                 type="number"
-                                value={auth.userData.data.pincode}
+                                value={pincode}
                                 onChange={(event) => setPincode(event.target.value)}
                             />
                         </FormControl>
-                        {typeof error === "string" && (
+                        {error && (
                             <Text color="red.500" fontWeight="semibold">
                                 {error}
                             </Text>
@@ -93,15 +95,9 @@ const UserInfo = () => {
                         </Button>
                     </Stack>
                 </form>
-                {/* <Link to='/login'>
-                    <Text m={5}>Already registered??? Login</Text>
-                </Link> */}
             </Box>
         </div>
     );
 };
 
 export default UserInfo;
-
-
-

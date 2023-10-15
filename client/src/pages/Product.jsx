@@ -1,104 +1,34 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ProductContext } from '../context/ProductContext';
-import { Box, Button, Flex, Heading, Text, Image } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, Image, Link as ChakraLink } from '@chakra-ui/react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link as RouteLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/LoggedIn';
+
 const Product = () => {
   const [productId, setProductID] = useState('');
   const [size, setSize] = useState('');
   const { products } = useContext(ProductContext);
   const [error, setError] = useState('');
 
-  const auth = useContext(AuthContext)
-  console.log(auth.searchP[0])
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const reload = async () => {
-      auth.setSearchP([])
+      auth.setSearchP([]);
     };
     reload();
   }, []);
 
-
-  return (
-    <>
-      <div className=''>
-        {
-          auth?.searchP.length == 0 && <Flex flexWrap="wrap" justifyContent="center" alignItems="center" >
-            {products.map((product) => (
-              <Link to={`/singleproduct/${product._id}`} key={product._id} color='blue'>
-                <Box
-                  key={product._id}
-                  maxW="sm"
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  m={4}
-                >
-                  <Box className=' p-10 transition ease-in-out delay-50  hover:scale-110 duration-500 '>
-                    <Box d="flex" alignItems="baseline" className=''>
-                      <Image src={product.img} alt='Dan Abramov' h='300px' w='300px' className='rounded-md' />
-                      <Text fontSize="sm" color="gray.500" fontWeight="semibold">
-                        {product.brand} {product.model}
-                      </Text>
-                      <Text
-                        ml={2}
-                        fontSize="sm"
-                        color="gray.500"
-                        fontWeight="semibold"
-                      >
-                        ({product.options.join(', ')})
-                      </Text>
-                    </Box>
-
-                    <Box
-                      mt="1"
-                      fontWeight="semibold"
-                      as="h4"
-                      lineHeight="tight"
-                      isTruncated
-                    >
-                      {product.description}
-                    </Box>
-
-                    <Box d="flex" mt="2" alignItems="center">
-                      <Box as="span" ml="2" color="gray.600" fontSize="sm">
-                        {product.size.join(', ')}
-                      </Box>
-                    </Box>
-
-                    <Box d="flex" mt="2" alignItems="center">
-                      <Box as="span" color="gray.600" fontSize="sm">
-                        {product.reviews.length} reviews
-                      </Box>
-                    </Box>
-
-                    <Box d="flex" mt="2" alignItems="center">
-                      <Heading as="h4" size="md">
-                        {product.discount
-                          ? `$${(
-                            (product.price * (100 - product.discount)) /
-                            100
-                          ).toFixed(2)}`
-                          : `$${product.price}`}
-                      </Heading>
-                    </Box>
-
-                    <Box d="flex" mt="2" alignItems="center">
-                    </Box>
-                  </Box>
-                </Box>
-              </Link>
-            ))}
-          </Flex>
-        }
-      </div>
-      <div className=''>
-        {
-          auth?.searchP.length != 0 && <Flex flexWrap="wrap" justifyContent="center" alignItems="center" >
-            <Link to={`/singleproduct/${auth?.searchP[0]._id}`} key={auth?.searchP[0]._id} color='blue'>
+  const renderProducts = () => {
+    if (auth?.searchP.length === 0) {
+      return (
+        <Flex flexWrap="wrap" justifyContent="center" alignItems="center">
+          {products.map((product) => (
+            <ChakraLink as={RouteLink} to={`/singleproduct/${product._id}`} key={product._id} color='blue'>
               <Box
-                key={auth?.searchP[0]._id}
+                key={product._id}
                 maxW="sm"
                 borderWidth="1px"
                 borderRadius="lg"
@@ -107,9 +37,9 @@ const Product = () => {
               >
                 <Box className=' p-10 transition ease-in-out delay-50  hover:scale-110 duration-500 '>
                   <Box d="flex" alignItems="baseline" className=''>
-                    <Image src={auth?.searchP[0].img} alt='Dan Abramov' h='300px' w='300px' className='rounded-md' />
+                    <Image src={product.img} alt='Dan Abramov' h='300px' w='300px' className='rounded-md' />
                     <Text fontSize="sm" color="gray.500" fontWeight="semibold">
-                      {auth?.searchP[0].brand} {auth?.searchP[0].model}
+                      {product.brand} {product.model}
                     </Text>
                     <Text
                       ml={2}
@@ -117,7 +47,7 @@ const Product = () => {
                       color="gray.500"
                       fontWeight="semibold"
                     >
-                      ({auth?.searchP[0].options.join(', ')})
+                      ({product.options.join(', ')})
                     </Text>
                   </Box>
 
@@ -128,29 +58,29 @@ const Product = () => {
                     lineHeight="tight"
                     isTruncated
                   >
-                    {auth?.searchP[0].description}
+                    {product.description}
                   </Box>
 
                   <Box d="flex" mt="2" alignItems="center">
                     <Box as="span" ml="2" color="gray.600" fontSize="sm">
-                      {auth?.searchP[0].size.join(', ')}
+                      {product.size.join(', ')}
                     </Box>
                   </Box>
 
                   <Box d="flex" mt="2" alignItems="center">
                     <Box as="span" color="gray.600" fontSize="sm">
-                      {auth?.searchP[0].reviews.length} reviews
+                      {product.reviews.length} reviews
                     </Box>
                   </Box>
 
                   <Box d="flex" mt="2" alignItems="center">
                     <Heading as="h4" size="md">
-                      {auth?.searchP[0].discount
+                      {product.discount
                         ? `$${(
-                          (auth?.searchP[0].price * (100 - auth?.searchP[0].discount)) /
+                          (product.price * (100 - product.discount)) /
                           100
                         ).toFixed(2)}`
-                        : `$${auth?.searchP[0].price}`}
+                        : `$${product.price}`}
                     </Heading>
                   </Box>
 
@@ -158,10 +88,86 @@ const Product = () => {
                   </Box>
                 </Box>
               </Box>
-            </Link>
-          </Flex>
-        }
-      </div>
-    </>)
-}
+            </ChakraLink>
+          ))}
+        </Flex>
+      );
+    } else {
+      return (
+        <Flex flexWrap="wrap" justifyContent="center" alignItems="center">
+          <ChakraLink as={RouteLink} to={`/singleproduct/${auth?.searchP[0]._id}`} key={auth?.searchP[0]._id} color='blue'>
+            <Box
+              key={auth?.searchP[0]._id}
+              maxW="sm"
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              m={4}
+            >
+              <Box className=' p-10 transition ease-in-out delay-50  hover:scale-110 duration-500 '>
+                <Box d="flex" alignItems="baseline" className=''>
+                  <Image src={auth?.searchP[0].img} alt='Dan Abramov' h='300px' w='300px' className='rounded-md' />
+                  <Text fontSize="sm" color="gray.500" fontWeight="semibold">
+                    {auth?.searchP[0].brand} {auth?.searchP[0].model}
+                  </Text>
+                  <Text
+                    ml={2}
+                    fontSize="sm"
+                    color="gray.500"
+                    fontWeight="semibold"
+                  >
+                    ({auth?.searchP[0].options.join(', ')})
+                  </Text>
+                </Box>
+
+                <Box
+                  mt="1"
+                  fontWeight="semibold"
+                  as="h4"
+                  lineHeight="tight"
+                  isTruncated
+                >
+                  {auth?.searchP[0].description}
+                </Box>
+
+                <Box d="flex" mt="2" alignItems="center">
+                  <Box as="span" ml="2" color="gray.600" fontSize="sm">
+                    {auth?.searchP[0].size.join(', ')}
+                  </Box>
+                </Box>
+
+                <Box d="flex" mt="2" alignItems="center">
+                  <Box as="span" color="gray.600" fontSize="sm">
+                    {auth?.searchP[0].reviews.length} reviews
+                  </Box>
+                </Box>
+
+                <Box d="flex" mt="2" alignItems="center">
+                  <Heading as="h4" size="md">
+                    {auth?.searchP[0].discount
+                      ? `$${(
+                        (auth?.searchP[0].price * (100 - auth?.searchP[0].discount)) /
+                        100
+                      ).toFixed(2)}`
+                      : `$${auth?.searchP[0].price}`}
+                  </Heading>
+                </Box>
+
+                <Box d="flex" mt="2" alignItems="center">
+                </Box>
+              </Box>
+            </Box>
+          </ChakraLink>
+        </Flex>
+      );
+    }
+  };
+
+  return (
+    <>
+      {renderProducts()}
+    </>
+  );
+};
+
 export default Product;

@@ -5,7 +5,18 @@ import { AuthContext } from '../context/LoggedIn';
 
 const Navbar = () => {
   const auth = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    auth.setIsLoggedIn(false);
+    navigate('/login');
+  };
+
+  const handleProfile = () => {
+    auth.setIsLoggedIn(false);
+    navigate('/profile');
+  };
+
   return (
     <Box py={2} bg="gray.100" fontFamily="Comfortaa">
       <Flex justify="space-between" alignItems="center" px={{ base: 4, md: 8 }}>
@@ -18,8 +29,11 @@ const Navbar = () => {
               <Text mr={4} fontSize="md" color="black" fontFamily="mono">
                 {auth.email}
               </Text>
-              <Link href="#" fontSize="md" color="black" onClick={() => { auth.setIsLoggedIn(false); navigate('/login') }} _hover={{ color: 'gray.500' }} fontFamily="mono">
+              <Link href="#" fontSize="md" color="black" onClick={handleSignOut} _hover={{ color: 'gray.500' }} fontFamily="mono">
                 Sign Out
+              </Link>
+              <Link href="#" fontSize="md" color="black" onClick={handleProfile} _hover={{ color: 'gray.500' }} fontFamily="mono">
+                Profile
               </Link>
             </>
           ) : (

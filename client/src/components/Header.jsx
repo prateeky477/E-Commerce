@@ -45,12 +45,6 @@ const Header = () => {
           <Text as={Link} to='/' cursor="pointer" _hover={{ color: "slateblue" }}>
             Products
           </Text>
-          {/* <Text as={Link} to='/' cursor="pointer" _hover={{ color: "slateblue" }}>
-            Women
-          </Text>
-          <Text as={Link} to='/' cursor="pointer" _hover={{ color: "slateblue" }}>
-            Kids
-          </Text> */}
           {
             auth.isLoggedIn ? <Text as={Link} to='/userinfo' cursor="pointer" _hover={{ color: "slateblue" }}>
               Userinfo
