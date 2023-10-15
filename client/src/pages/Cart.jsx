@@ -27,7 +27,7 @@ const Cart = () => {
     // Check if user data exists in auth
     if (auth && auth.userData) {
       // Access the cart from userData
-      const userCart = auth.userData.data.cart;
+      const userCart = auth.userData.data.data.cart;
       setCart(userCart);
     } else {
       setError("User data not found.");
