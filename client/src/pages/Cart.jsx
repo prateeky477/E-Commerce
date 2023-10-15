@@ -28,7 +28,7 @@ const Cart = () => {
     const fetchCart = async () => {
       try {
         const response = await auth?.userData;
-        setCart(response.cart);
+        setCart(response.data.data.cart);
         console.log(response.data.data,response.data.data.cart)
       } catch (err) {
         setError(err.response.data);
