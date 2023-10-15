@@ -27,9 +27,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await axios.get("https://e-commerce-aaoa.vercel.app/api/cart", {
-          withCredentials: true,
-        });
+        const response = await auth?.userData?.data?.cart;
         setCart(response.data.cart);
       } catch (err) {
         setError(err.response.data);
