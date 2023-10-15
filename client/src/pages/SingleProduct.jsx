@@ -63,7 +63,7 @@ const SingleProduct = () => {
     try {
       const endpoint = isFavorite ? "remove" : "add";
       await axios.post(
-        `/api/fav/${endpoint}`,
+        `https://e-commerce-aaoa.vercel.app/api/fav/${endpoint}`,
         { productId: id },
         {
           withCredentials: true,
@@ -88,7 +88,7 @@ const SingleProduct = () => {
 
     try {
       const response = await axios.post(
-        "/api/products",
+        "https://e-commerce-aaoa.vercel.app/api/products",
         {
           productId: id,
           size: psize,

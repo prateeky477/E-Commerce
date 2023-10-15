@@ -28,7 +28,7 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("api/login", {
+      const response = await axios.post("https://e-commerce-aaoa.vercel.app/api/login", {
         username: email,
         password: password,
       }, {
