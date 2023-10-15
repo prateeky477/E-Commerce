@@ -8,12 +8,15 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
+    // Clear user data from localStorage
+    localStorage.removeItem('userData');
+
     auth.setIsLoggedIn(false);
     navigate('/login');
   };
 
   const handleProfile = () => {
-    auth.setIsLoggedIn(false);
+    // auth.setIsLoggedIn(false);
     navigate('/profile');
   };
 

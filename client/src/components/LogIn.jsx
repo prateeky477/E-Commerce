@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   FormControl,
   FormLabel,
@@ -23,6 +23,15 @@ const Login = () => {
 
   const auth = useContext(AuthContext);
 
+  // Check if user data exists in localStorage on component mount
+  useEffect(() => {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      // If user data is found, set isLoggedIn to true
+      auth.setIsLoggedIn(true);
+    }
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -35,6 +44,9 @@ const Login = () => {
         withCredentials: true,
       });
 
+      // Store user data in localStorage upon successful login
+      localStorage.setItem('userData', JSON.stringify(response.data));
+      
       auth.setUserData(response.data);
       auth.setIsLoggedIn(true);
       auth.loggedEmail(email);
