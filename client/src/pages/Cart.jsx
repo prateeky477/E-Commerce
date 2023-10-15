@@ -21,25 +21,27 @@ const Cart = () => {
   const [cartProduct, setCartProduct] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const auth = useContext(AuthContext)
-  console.log(auth)
-
-  setCart(auth.userData.data.data.cart);
-  
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchCart = async () => {
-      setCart(auth.userData.data.data.cart);
-    };
-    fetchCart();
-  }, []);
+    // Check if user data exists in auth
+    if (auth && auth.userData) {
+      // Access the cart from userData
+      const userCart = auth.userData.data.cart;
+      setCart(userCart);
+    } else {
+      setError("User data not found.");
+    }
+  }, [auth]);
 
   useEffect(() => {
     let tempCartProduct = [];
     cart?.forEach((prod) => {
-      tempCartProduct.push(
-        products.find((product) => product._id === prod.pid)
-      );
+      // Find the product that matches the cart item by _id
+      const product = products.find((p) => p._id === prod.pid);
+      if (product) {
+        tempCartProduct.push(product);
+      }
     });
     setCartProduct(tempCartProduct);
   }, [cart, products]);
@@ -48,7 +50,6 @@ const Cart = () => {
     let totalPrice = 0;
     cartProduct?.forEach((prod) => {
       totalPrice += prod.price;
-      console.log(prod.price)
     });
     setTotalPrice(totalPrice);
   }, [cartProduct]);
