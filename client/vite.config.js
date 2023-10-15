@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/": "https://e-commerce-aaoa.vercel.app/"
+      "/api": "https://e-commerce-aaoa.vercel.app"
     },
     watch: {
       usePolling: true,
