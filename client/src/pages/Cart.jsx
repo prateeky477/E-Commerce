@@ -27,8 +27,9 @@ const Cart = () => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await auth?.userData?.data?.cart;
+        const response = await auth?.userData;
         setCart(response.data.cart);
+        console.log(response,cart)
       } catch (err) {
         setError(err.response.data);
       }
