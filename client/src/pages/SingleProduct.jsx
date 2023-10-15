@@ -31,13 +31,13 @@ const SingleProduct = () => {
     width: "100%",
   });
 
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     const product = products.find((item) => item._id === id);
-  //     setProduct(product);
-  //   };
-  //   getProduct();
-  // }, [id, products]);
+  useEffect(() => {
+    const getProduct = async () => {
+      const product = products.find((item) => item._id === id);
+      setProduct(product);
+    };
+    getProduct();
+  }, [id, products]);
 
   // useEffect(() => {
   //   const checkFavoriteStatus = async () => {
