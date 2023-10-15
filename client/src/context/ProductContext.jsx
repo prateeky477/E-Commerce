@@ -12,7 +12,7 @@ const ProductProvider = ({ children }) => {
 
         const fetchProducts = async () => {
             try {
-                const response = await axios.get("https://e-commerce-aaoa.vercel.app/api/products")
+                const response = await axios.get("api/api/products")
                 console.log(response.data.products);
                 setProducts(response.data.products)
                 console.log(response.data)
