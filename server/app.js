@@ -22,6 +22,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cors({
   origin: "https://e-commerce-sandy-chi.vercel.app",
+  methods:["GET","POST"],
   credentials: true,
 }));
 app.use(express.static("public"));
