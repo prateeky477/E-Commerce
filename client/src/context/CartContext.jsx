@@ -10,7 +10,7 @@ const CartProvider = ({ children }) => {
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/cart');
+                const response = await axios.get('/api/cart');
                 setCart(response.data.cart);
             } catch (err) {
                 setError(err.response.data);

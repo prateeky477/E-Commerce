@@ -63,7 +63,7 @@ const SingleProduct = () => {
     try {
       const endpoint = isFavorite ? "remove" : "add";
       await axios.post(
-        `http://localhost:3000/fav/${endpoint}`,
+        `/api/fav/${endpoint}`,
         { productId: id },
         {
           withCredentials: true,
@@ -88,7 +88,7 @@ const SingleProduct = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/products",
+        "/api/products",
         {
           productId: id,
           size: psize,
