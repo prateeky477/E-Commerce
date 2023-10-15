@@ -26,7 +26,7 @@ const UserInfo = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/api/userinfo', {
+            const response = await axios.post('api/userinfo', {
                 name,
                 phone,
                 address,

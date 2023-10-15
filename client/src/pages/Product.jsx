@@ -95,7 +95,7 @@ const Product = () => {
     } else {
       return (
         <Flex flexWrap="wrap" justifyContent="center" alignItems="center">
-          <ChakraLink as={RouteLink} to={`/singleproduct/${auth?.searchP[0]?._id}`} key={auth?.searchP[0]?._id} color='blue'>
+          <ChakraLink as={RouteLink} to={`/singleproduct/${auth?.searchP[0]._id}`} key={auth?.searchP[0]._id} color='blue'>
             <Box
               key={auth?.searchP[0]._id}
               maxW="sm"

@@ -12,11 +12,10 @@ const ProductProvider = ({ children }) => {
 
         const fetchProducts = async () => {
             try {
-                const response = await axios.get("/api/products")
+                const response = await axios.get("api/products")
                 console.log(response.data.products);
                 setProducts(response.data.products)
-                // console.log(response.data.products[1])
-                // auth.setSearchP([])
+                console.log(response.data)
             }
             catch (err) {
                 setError(err.response.data);
