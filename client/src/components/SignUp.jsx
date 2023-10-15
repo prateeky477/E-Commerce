@@ -22,7 +22,7 @@ const SignUp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post("/api/register", {
+            const response = await axios.post("api/register", {
                 username: email,
                 password: password,
             },
