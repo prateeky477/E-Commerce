@@ -21,7 +21,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: "https://e-commerce-sandy-chi.vercel.app",
+  origin: ["https://e-commerce-sandy-chi.vercel.app","https://e-commerce-prateeky477.vercel.app","e-commerce-git-main-prateeky477.vercel.app"],
   methods:["GET","POST"],
   credentials: true,
 }));
