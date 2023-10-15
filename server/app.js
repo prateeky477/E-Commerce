@@ -21,9 +21,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin:"*",
-  methods:["GET","POST"],
-  credentials: true,
+  origin: 'https://e-commerce-sandy-chi.vercel.app',
+  methods: 'GET, POST, PUT, DELETE',
+  allowedHeaders: 'Content-Type, Authorization',
+  credentials: true, // Allow credentials
 }));
 app.use(express.static("public"));
 app.use(express.json());
